@@ -96,7 +96,7 @@ def fasta_profiler(conf, prefix, filename):
     run_cmd("bcftools view -c 1 %s -Oz -o %s -T %s" % (wg_vcf_file,vcf_file,conf['bed']))
     vcf_obj = vcf(vcf_file)
     vcf_obj = vcf_obj.run_snpeff(conf["snpEff_db"],conf["ref"],conf["gff"],rename_chroms= conf.get("chromosome_conversion",None))
-    ann = vcf_obj.load_ann(bed_file=conf["bed"],keep_variant_types = ["upstream","synonymous","noncoding"])
+    ann = vcf_obj.load_ann(bed_file=conf["bed"],keep_variant_types = ["upstream","noncoding"])
 
     results = {
         "variants":ann,
@@ -116,7 +116,7 @@ def vcf_profiler(conf, prefix, sample_name, vcf_file,delly_vcf_file):
     run_cmd("bcftools view -T %s %s -Oz -o %s" % (conf["bed"],vcf_file,vcf_targets_file))
     vcf_obj = vcf(vcf_targets_file)
     vcf_obj = vcf_obj.run_snpeff(conf["snpEff_db"],conf["ref"],conf["gff"],rename_chroms= conf.get("chromosome_conversion",None))
-    ann = vcf_obj.load_ann(bed_file=conf["bed"],keep_variant_types = ["upstream","synonymous","noncoding"])
+    ann = vcf_obj.load_ann(bed_file=conf["bed"],keep_variant_types = ["upstream","noncoding"])
     results = {"variants":[],"missing_pos":[],"qc":{"pct_reads_mapped":"NA","num_reads_mapped":"NA"}}
     results["variants"]  = ann
 
