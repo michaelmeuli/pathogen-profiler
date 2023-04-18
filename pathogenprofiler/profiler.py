@@ -33,7 +33,7 @@ def bam_profiler(conf, bam_file, prefix, platform, caller, threads=1, no_flagsta
     else:
         ann_vcf_obj = vcf_obj.run_snpeff(conf["snpEff_db"],conf["ref"],conf["gff"],rename_chroms= conf.get("chromosome_conversion",None))
     log("load_ann without keeping synonymous in keep_variant_types in bam_profiler of pathogen-profiler ")
-    ann = ann_vcf_obj.load_ann(bed_file=conf["bed"],keep_variant_types = ["upstream","noncoding"],min_af=min_af)
+    ann = ann_vcf_obj.load_ann(bed_file=conf["bed"],keep_variant_types = ["upstream","noncoding"],min_af=min_af)  # ["upstream","synonymous","noncoding"]
 
 
     ### Get % and num reads mapping ###
